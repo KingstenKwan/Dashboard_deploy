@@ -1,14 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 pip install pandas plotly dash
-
-
-# In[2]:
-
 
 import pandas as pd
 import plotly.express as px
@@ -17,10 +7,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 from datetime import datetime
-
-
-# In[3]:
-
 
 url = 'https://raw.githubusercontent.com/KingstenKwan/Crypto_dataset/main/'
 csv_files = [
@@ -39,11 +25,9 @@ for file in csv_files:
     df = pd.read_csv(url + file)
     df_list.append(df)
 
-
-# In[4]:
-
-
 app = dash.Dash(__name__)
+
+server = app.server
 
 dropdown_options = [{"label": crypto[5:-4], "value": crypto[5:-4]} for crypto in csv_files]
 
@@ -161,10 +145,6 @@ def add_transaction(n_clicks, code, date, buy_sell, amount):
         print(f"New Transaction: Code - {code}, Date - {date}, Buy/Sell - {buy_sell}, Amount -{amount}")
         return "Transaction added successfully!"      
     return ""
-
-
-# In[7]:
-
 
 app.run(jupyter_mode="external")
 
